@@ -10,11 +10,11 @@ permissions:
 
 jobs:
   label:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Checkout repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
 
     - name: Parse issue body
       id: issue-parser
@@ -23,12 +23,6 @@ jobs:
       with:
         template-filepath: '.github/ISSUE_TEMPLATE/bugreport.yml'
         issue-form-body: '${{ github.event.issue.body }}'
-
-    - name: Setup Python 3.11
-      uses: actions/setup-python@v5
-      with:
-        cache: 'pip'
-        python-version: '3.11'
 
     - name: Install dependencies
       run: pip install -r requirements.txt
