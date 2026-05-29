@@ -162,7 +162,13 @@ def main() -> None:
     # Assign maintainers if possible
     for maintainer in device_maintainers(issue_body.device):
         try:
-            issue.add_to_assignees(github.get_user(maintainer))
+            user = github.get_user(maintainer)
+            _, data = issue._requester.requestJsonAndCheck('POST', f'{issue.url}/assignees', input={
+                'assignees': [user.login],
+            })
+
+            if not any(x['id'] == user.id for x in data['assignees']):
+                raise GithubException(status=400, message='User not added')
         except GithubException as e:
             print(f"::warning ::Failed to assign {maintainer}: {e.message}", flush=True)
 
