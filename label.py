@@ -87,7 +87,11 @@ def issue_errors(issue: IssueBody) -> list:
     # Load supported devices list
     devices = device_list()
 
-    if issue.device not in devices:
+    for device in devices:
+        if device.lower() == issue.device.lower():
+            issue.device = device
+            break
+    else:
         ret.append(
             f'Device "{issue.device}" is not a valid device codename. Supported values are: {", ".join([f"`{device}`" for device in devices.keys()])}'
         )
