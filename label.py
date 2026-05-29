@@ -157,8 +157,10 @@ def main() -> None:
 
     # Assign maintainers if possible
     for maintainer in device_maintainers(issue_body.device):
-        with suppress(GithubException):
+        try:
             issue.add_to_assignees(github.get_user(maintainer))
+        except GithubException as e:
+            print(f"::warning ::Failed to assign {maintainer}: {e.message}", flush=True)
 
 
 if __name__ == '__main__':
