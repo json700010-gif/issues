@@ -146,7 +146,7 @@ def main() -> None:
             '\n'.join(
                 [
                     "Hi! It appears you didn't read or follow the provided issue template.",
-                    'Please edit your issue to include the requested fields and follow the provided template, then reopen it by commenting `/reopen`.',
+                    'Please edit your issue to include the requested fields and follow the provided template, then reopen it.',
                     'For more information please see https://wiki.lineageos.org/how-to/bugreport.',
                     '',
                     'Problems:',
