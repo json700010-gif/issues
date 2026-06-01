@@ -18,17 +18,17 @@ jobs:
     - name: Detect /reopen comment
       id: reopen-check
       if: github.event_name == 'issue_comment'
-      run: |
-        BODY="${{ github.event.comment.body }}"
-        AUTHOR="${{ github.event.comment.user.login }}"
-        ISSUE_AUTHOR="${{ github.event.issue.user.login }}"
-        STATE="${{ github.event.issue.state }}"
+      uses: actions/github-script@v9
+      with:
+        script: |
+          const issue = context.payload.issue;
+          const comment = context.payload.comment;
+          const isReopen =
+            issue.state === "closed" &&
+            comment.user.login !== issue.user.login &&
+            comment.body.trim() === "/reopen";
 
-        if [ "$STATE" = "closed" ] && [ "$AUTHOR" = "$ISSUE_AUTHOR" ] && echo "$BODY" | grep -qE '^/reopen\b'; then
-          echo "reopen=true" >> $GITHUB_OUTPUT
-        else
-          echo "reopen=false" >> $GITHUB_OUTPUT
-        fi
+          core.setOutput("reopen", isReopen ? "true" : "false");
 
     - name: Checkout repo
       if: |
