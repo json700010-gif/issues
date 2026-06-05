@@ -118,7 +118,7 @@ def issue_errors(issue: IssueBody) -> list:
                 f'LineageOS version "{issue.version}" is not a valid LineageOS version. Supported value is: {device_version}'
             )
 
-    if not re.findall(r'^\d{8}$', issue.date):
+    if not re.findall(r'^\d{8}(-.*)?$', issue.date):
         ret.append(
             f'Build date "{issue.date}" is not a valid date. Valid date format is YYYYMMDD'
         )
