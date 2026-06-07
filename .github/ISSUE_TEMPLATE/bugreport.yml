@@ -22,7 +22,7 @@ body:
   - type: input
     id: device
     attributes:
-      label: Device
+      label: Device Codename
       description: |
         codename of the device you're using (ie: "mako", not "nexus 4")
       placeholder: "mako"
