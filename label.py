@@ -209,6 +209,16 @@ def main() -> None:
                 flush=True,
             )
 
+            if url := os.environ.get('DISCORD_WEBHOOK'):
+                requests.post(
+                    url,
+                    json={
+                        'username': 'GitHub',
+                        'avatar_url': 'https://cdn.discordapp.com/avatars/1483379599995047987/e57fd67dc7ca0cc840a0e87a82281bc5',
+                        'content': 'Failed to assign {maintainer}: {e.message}',
+                    },
+                )
+
 
 if __name__ == '__main__':
     main()

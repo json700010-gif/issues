@@ -59,6 +59,7 @@ jobs:
         steps.reopen-check.outputs.reopen == 'true'
       run: ./label.py
       env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         GITHUB_REPOSITORY: ${{ github.repository }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ISSUE_BODY: ${{ steps.issue-parser.outputs.parsed-issue }}
