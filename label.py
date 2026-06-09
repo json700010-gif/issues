@@ -215,7 +215,7 @@ def main() -> None:
                     json={
                         'username': 'GitHub',
                         'avatar_url': 'https://cdn.discordapp.com/avatars/1483379599995047987/e57fd67dc7ca0cc840a0e87a82281bc5',
-                        'content': 'Failed to assign {maintainer}: {e.message}',
+                        'content': f'Failed to assign {maintainer}: {e.message}',
                     },
                 )
 
