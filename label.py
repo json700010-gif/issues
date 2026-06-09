@@ -215,7 +215,15 @@ def main() -> None:
                     json={
                         'username': 'GitHub',
                         'avatar_url': 'https://cdn.discordapp.com/avatars/1483379599995047987/e57fd67dc7ca0cc840a0e87a82281bc5',
-                        'content': f'Failed to assign {maintainer}: {e.message}',
+                        'embeds': [
+                            {
+                                'title': f'Failed to assign {maintainer}: {e.message}',
+                                'url': os.environ.get(
+                                    'GITHUB_WORKFLOW_RUN_URL'
+                                ),
+                                'color': 15109472,
+                            }
+                        ],
                     },
                 )
 
